@@ -38,16 +38,19 @@ namespace cs_excel_testdatahelper
             string formula = Target.Formula;
             if (formula == null) return;
 
+            string value = string.Empty;
 
+            try
+            {
+                Excel.Range temp = sheet.get_Range(formula.Replace("=", string.Empty));
+                value = sheet.Cells[temp.Row, 2].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
 
-            string value = formula;
-
-
-
-
-
-
-            _formMessage.Text = value;
+            _formMessage.Text = "[" + value + "]";
 
         }
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -76,7 +79,7 @@ namespace cs_excel_testdatahelper
         {
             this.TopMost = true;
             this.Height = 0;
-            this.Width = 500;
+            this.Width = 1000;
 
             this.FormClosing += MainForm_FormClosing;
         }
