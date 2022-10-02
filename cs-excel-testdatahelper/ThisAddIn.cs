@@ -15,20 +15,20 @@ namespace cs_excel_testdatahelper
 {
     public partial class ThisAddIn
     {
-        #region 変数
-        private MainForm _formMessage = null;
+        #region プロパティ
+        public bool Enable { get; set; } = false;
+        public MainForm HelperForm { get; private set; } = null;
         #endregion
 
         #region イベントハンドラ
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            _formMessage = new MainForm();
-            _formMessage.Show();
-
+            HelperForm = new MainForm();
             this.Application.SheetSelectionChange += Application_SheetSelectionChange; ;
         }
         private void Application_SheetSelectionChange(object Sh, Excel.Range Target)
         {
+            if (!Enable) return;
             if (Sh == null) return;
             if (Target == null) return;
 
@@ -117,7 +117,7 @@ namespace cs_excel_testdatahelper
             }
 
             // リスト表示
-            _formMessage.ShowList(values);
+            HelperForm.ShowList(values);
         }
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
