@@ -50,12 +50,12 @@
             // columnHeaderNumber
             // 
             this.columnHeaderNumber.Text = "列番号";
-            this.columnHeaderNumber.Width = 70;
+            this.columnHeaderNumber.Width = 100;
             // 
             // columnHeaderValue
             // 
             this.columnHeaderValue.Text = "値";
-            this.columnHeaderValue.Width = 900;
+            this.columnHeaderValue.Width = 800;
             // 
             // MainForm
             // 

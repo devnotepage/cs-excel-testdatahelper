@@ -106,7 +106,7 @@ namespace cs_excel_testdatahelper
 
                 // 値取得
                 Excel.Range temp = sheet.get_Range(address);
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     values.Add(i + 1, sheet.Cells[temp.Row, i + 1].Value?.ToString() ?? string.Empty);
                 }
