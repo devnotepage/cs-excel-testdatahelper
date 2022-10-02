@@ -25,6 +25,9 @@ namespace cs_excel_testdatahelper
             HelperForm = new MainForm();
             this.Application.SheetSelectionChange += Application_SheetSelectionChange; ;
         }
+        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        {
+        }
         private void Application_SheetSelectionChange(object Sh, Excel.Range Target)
         {
             if (!HelperForm.Visible) return;
@@ -117,9 +120,6 @@ namespace cs_excel_testdatahelper
 
             // リスト表示
             HelperForm.ShowList(values);
-        }
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
-        {
         }
         #endregion
 
