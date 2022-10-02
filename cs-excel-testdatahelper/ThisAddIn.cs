@@ -35,8 +35,17 @@ namespace cs_excel_testdatahelper
             Excel.Worksheet sheet = Sh as Excel.Worksheet;
             if (sheet == null) return;
 
-            string value = Target.Formula;
-            if (value == null) return;
+            string formula = Target.Formula;
+            if (formula == null) return;
+
+
+
+            string value = formula;
+
+
+
+
+
 
             _formMessage.Text = value;
 
@@ -66,7 +75,7 @@ namespace cs_excel_testdatahelper
         public MainForm()
         {
             this.TopMost = true;
-            this.Height = 100;
+            this.Height = 0;
             this.Width = 500;
 
             this.FormClosing += MainForm_FormClosing;
