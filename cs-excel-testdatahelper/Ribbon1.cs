@@ -17,13 +17,11 @@ namespace cs_excel_testdatahelper
         {
             Globals.ThisAddIn.HelperForm.Show();
             Globals.ThisAddIn.HelperForm.Visible = true;
-            Globals.ThisAddIn.Enable = true;
         }
 
         private void buttonDisable_Click(object sender, RibbonControlEventArgs e)
         {
             Globals.ThisAddIn.HelperForm.Visible = false;
-            Globals.ThisAddIn.Enable = false;
         }
     }
 }
