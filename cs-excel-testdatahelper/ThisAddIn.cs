@@ -42,7 +42,10 @@ namespace cs_excel_testdatahelper
 
             try
             {
-                Excel.Range temp = sheet.get_Range(formula.Replace("=", string.Empty));
+                string address = formula;
+                address = address.Replace("=", string.Empty);
+                address = address.Replace("$", string.Empty);
+                Excel.Range temp = sheet.get_Range(address);
                 value = sheet.Cells[temp.Row, 2].Value.ToString();
             }
             catch (Exception ex)
