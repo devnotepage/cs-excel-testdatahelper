@@ -38,8 +38,7 @@ namespace cs_excel_testdatahelper
             string formula = Target.Formula;
             if (formula == null) return;
 
-            string value = string.Empty;
-
+            var values = new Dictionary<int, string>();
             try
             {
                 StringBuilder addressBuilder = new StringBuilder();
@@ -107,15 +106,18 @@ namespace cs_excel_testdatahelper
 
                 // 値取得
                 Excel.Range temp = sheet.get_Range(address);
-                value = sheet.Cells[temp.Row, 2].Value.ToString();
+                for (int i = 0; i < 5; i++)
+                {
+                    values.Add(i + 1, sheet.Cells[temp.Row, i + 1].Value?.ToString() ?? string.Empty);
+                }
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex);
             }
 
-            _formMessage.Text = "[" + value + "]";
-
+            // リスト表示
+            _formMessage.ShowList(values);
         }
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {

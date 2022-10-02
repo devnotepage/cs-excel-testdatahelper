@@ -15,11 +15,7 @@ namespace cs_excel_testdatahelper
         public MainForm()
         {
             InitializeComponent();
-
             this.TopMost = true;
-            this.Height = 0;
-            this.Width = 1000;
-
             this.FormClosing += MainForm_FormClosing;
         }
 
@@ -45,5 +41,16 @@ namespace cs_excel_testdatahelper
                 return (p);
             }
         }
+
+        #region 公開関数
+        public void ShowList(Dictionary<int, string> values)
+        {
+            this.listView1.Items.Clear();
+            foreach (var value in values)
+            {
+                this.listView1.Items.Add(new ListViewItem(new[] { value.Key.ToString(), value.Value }));
+            }
+        }
+        #endregion
     }
 }
