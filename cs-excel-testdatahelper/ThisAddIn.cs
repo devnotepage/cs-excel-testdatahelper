@@ -42,9 +42,70 @@ namespace cs_excel_testdatahelper
 
             try
             {
+                StringBuilder addressBuilder = new StringBuilder();
+
                 string address = formula;
                 address = address.Replace("=", string.Empty);
+                address = address.Replace(",", string.Empty);
                 address = address.Replace("$", string.Empty);
+                address = address.Replace("&", string.Empty);
+                address = address.Replace("+", string.Empty);
+                address = address.Replace("-", string.Empty);
+                address = address.Replace("*", string.Empty);
+                address = address.Replace("/", string.Empty);
+                address = address.Replace("%", string.Empty);
+
+                // ""内除外
+                bool start = false;
+                addressBuilder.Clear();
+                foreach (var s in address)
+                {
+                    switch (s)
+                    {
+                        case '"':
+                            start = !start;
+                            break;
+                        default:
+                            if (!start)
+                            {
+                                addressBuilder.Append(s);
+                            }
+                            break;
+                    }
+
+                }
+                address = addressBuilder.ToString();
+
+                // ()内取得
+                int nestCount = 0;
+                int nestCountMax = 0;
+                addressBuilder.Clear();
+                foreach (var s in address)
+                {
+                    switch (s)
+                    {
+                        case '(':
+                            nestCount++;
+                            nestCountMax = Math.Max(nestCountMax, nestCount);
+                            if (nestCount == nestCountMax)
+                            {
+                                addressBuilder.Clear();
+                            }
+                            break;
+                        case ')':
+                            nestCount--;
+                            break;
+                        default:
+                            if (nestCount == nestCountMax)
+                            {
+                                addressBuilder.Append(s);
+                            }
+                            break;
+                    }
+                }
+                address = addressBuilder.ToString();
+
+                // 値取得
                 Excel.Range temp = sheet.get_Range(address);
                 value = sheet.Cells[temp.Row, 2].Value.ToString();
             }
