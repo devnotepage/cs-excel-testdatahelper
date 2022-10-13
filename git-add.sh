@@ -1,3 +1,7 @@
 git add .
+printf "\n"
+
 git status
-read
+printf "\n"
+
+read -p "Complete!"

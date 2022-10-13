@@ -1,2 +1,4 @@
 git status
-read
+printf "\n"
+
+read -p "Complete!"
